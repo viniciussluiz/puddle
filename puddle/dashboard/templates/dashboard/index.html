@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Meus itens</h2>
+
+    <div class="grid grid-cols-3 gap-3">
+        {% for item in items %}
+        <div>
+            <a href="{% url 'item:detail' item.id %}">
+            <div class="w-70 h-48 overflow-hidden relative">
+                <img src="{{ item.image.url }}" class="absolute w-full h-full object-cover">
+            </div>
+
+
+            <div class="w-70 h-40 p-6 bg-white rounded-b-xl">
+                <h2 class="text-2xl">{{ item.name }}</h2>
+                <p class="text-gray-500">Price: {{ item.price }}</p>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="mt-6 px-6 py-12 bg-gray-100 rounded-xl">
+    <h2 class="mb-12 text-2xl text-center">Categorias</h2>
+
+    <div class="grid grid-cols-3 gap-3">
+        {% for category in categories %}
+        <div>
+            <a href="#">
+
+                <div class="p-6 bg-white rounded-b-xl">
+                    <h2 class="text-2xl">{{ category.name }}</h2>
+                    <p class="text-gray-500">
+                        {{ category.items.count }} {% if category.items.count == 1 %}item{% else %}itens{% endif %}
+                    </p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
